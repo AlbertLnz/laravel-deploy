@@ -24,6 +24,8 @@ Route::post('register', [PassportController::class, 'register'])->name('api.regi
 Route::post('login', [PassportController::class, 'login'])->name('api.login');
 
 Route::get('/restaurants', [RestaurantController::class, 'index'])->name('api.restaurants.index');
+Route::get('/prueba', [RestaurantController::class, 'prueba'])->name('api.restaurants.prueba');
+
 
 // De esta manera, el usuario para acceder a la ruta necesita el token de login (en este caso no hace falta crear un propio middleware) <- No token === error 500
 Route::middleware('auth:api')->get('/restaurants/{id}', [RestaurantController::class, 'showUserRestaurants'])->name('api.restaurants.showUserRestaurants');

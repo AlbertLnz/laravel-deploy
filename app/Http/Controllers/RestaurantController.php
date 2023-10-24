@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
 {
+    public function prueba(){
+        return response(['message' => "bienvenido al controler con response()"], 200);
+    }
+
+
     public function index(){
         return Restaurant::all();
     }

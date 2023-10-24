@@ -1,66 +1,124 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Getting Started with Laravel on Render
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Getting Started with Laravel on Render](https://res.cloudinary.com/dgrpkngjn/image/upload/c_scale,w_940/v1673289651/technical_writing/laravel-on-render/render-bg_psuzvw.jpg)
 
-## About Laravel
+Render is a unified cloud that enables you build and run all your apps, yes all your apps since it can use dockerized containers to serve your applications to the public. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Since Heroku discontinued their free tier services, Render has quickly become the de facto Heroku alternative offering exceptional services that allow you to easily scale your applications from hobby development to fully-fledged applications that can serve millions of users. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Render offers instant deployment for the following tech stacks:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Web Services - Django & Flask, Rails & Express, GraphQL & REST
+2. Static Websites - Create React App, Gatsby and Hugo
+3. Background Workers - Celery, Sidekiq, RabbitMQ
+4. Cron Jobs - allows you to schedule and run any command, reliably and easily
+5. Dockerfiles - if you can Dockerize it you can run it on Render. You can run virtually anything with minimal setup using custom Dockerfiles.
+6. Private Services - you can run internal services on a private network with ease
+7. PostgreSQL - Spin up fully managed PostgreSQL databases with automated backups.
+8. Redis®️ - fully managed in-memory storage with live metrics
 
-## Learning Laravel
+You can quickly see that Render is a powerful platform that reduces the time it takes to get from building to running your application. Getting started with Laravel on Render is pretty simple with some knowledge on Docker.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Pre-requisites
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Render account
+2. Github account
+3. Knowledge of Docker
+4. Knowledge of Laravel
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Getting Started
 
-## Laravel Sponsors
+1. On your local machine create a new Laravel application by running the following command:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    ```shell
+    laravel new laravel-on-render
+    ```
 
-### Premium Partners
+2. Next, we will create a repo on Github and push our Laravel application. You can find more details on how to do this on Github's documentation **[here](https://docs.github.com/en/get-started/importing-your-projects-to-github/importing-source-code-to-github/adding-locally-hosted-code-to-github)**.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+3. Head over to **[Render](https://render.com)** and create a new account. You can use your Google, Github or GitLab accounts to quickly sign up.
 
-## Contributing
+4. On the Render dashboard, click the blue action button and create a new **PostgreSQL Database** as shown below and enter your preferred db details.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    ![PostgreSQL Database on Render](https://res.cloudinary.com/dgrpkngjn/image/upload/c_scale,w_940/v1673290145/technical_writing/laravel-on-render/render-postgresql_v2b4cy.png)
+5. With the DB out of the way, create a new **Web Service** and give it permission to access the repo you had created earlier.
+   ![Docker Web](https://res.cloudinary.com/dgrpkngjn/image/upload/c_scale,w_940/v1673290146/technical_writing/laravel-on-render/render-create-new-service_b3ulu9.png)
+   
+6. Select **Docker** as your runtime enviroment and update the Advanced section with the details below:
+    | KEY   |     VALUE      |  
+    |----------|:-------------|
+    | `DATABASE_URL` |  The **internal DB connection URL**. You can find this when you click Connect on your DB |
+    | `DB_CONNECTION` |    `pgsql`   |
+    | `APP_KEY` | The app key as generated by the Laravel command `php artisan key:generate --show` |
 
-## Code of Conduct
+    ![PostgreSQL Database URL](https://res.cloudinary.com/dgrpkngjn/image/upload/c_scale,w_940/v1673290146/technical_writing/laravel-on-render/render-db-connection-url_n2lnhx.png)
+    ***<p style="width:100%; text-align:center; font-size:11px">PostgreSQL Internal Database URL</p>***
+    
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+That's all we need for the the Docker Web Service. Now we need to make a few changes to our code to allow Render to deploy our application.
 
-## Security Vulnerabilities
+## Updating Laravel code for Render
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. We need to force all requests on our application through HTTPS. Render automatically manages TLS for us but we need to tell Laravel to parse our assets in HTTPS. To do this open your `app/Providers/AppServiceProvider.php` and update the **boot** method as follows:
+   ```php
+   public function boot(UrlGenerator $url)
+    {
+        if (env('APP_ENV') == 'production') {
+            $url->forceScheme('https');
+        }
+    }
+   ```
+2. Secondly, we need to configure our repository to deploy Laravel using Docker and NGINX. Our build will be based on the [nginx-php-fpm](https://gitlab.com/ric_harvey/nginx-php-fpm) Docker image.
+   1. Create a `.dockerignore` file and add the following code
+        ```.ignore
+        /node_modules
+        /public/hot
+        /public/storage
+        /storage/*.key
+        /vendor
+        .env
+        .phpunit.result.cache
+        npm-debug.log
+        yarn-error.log
+        ```
+   2. Create a ```Dockerfile``` and add the following code
+        ```shell
+        FROM richarvey/nginx-php-fpm:1.7.2
 
-## License
+        COPY . .
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+        # Image config
+        ENV SKIP_COMPOSER 1
+        ENV WEBROOT /var/www/html/public
+        ENV PHP_ERRORS_STDERR 1
+        ENV RUN_SCRIPTS 1
+        ENV REAL_IP_HEADER 1
+
+        # Laravel config
+        ENV APP_ENV production
+        ENV APP_DEBUG false
+        ENV LOG_CHANNEL stderr
+
+        # Allow composer to run as root
+        ENV COMPOSER_ALLOW_SUPERUSER 1
+
+        CMD ["/start.sh"]
+        ```
+   3. Under the folder `conf/nginx/` create the file `nginx-site.conf` and add the code from this **[commit](https://github.com/victorokech/laravel-on-render/commit/1a0662997d0afcc0ed040d0626191d63984d6750)**.
+   4. Last but not least, we need a deploy script that will run after PHP starts. This include things like, running composer, caching and DB migration and seeding. Create this `bash` script under the folder scripts `scripts/00-laravel-deploy.sh` and add the code below:
+   ```bash
+   #!/usr/bin/env bash
+    echo "Running composer"
+    composer global require hirak/prestissimo
+    composer install --no-dev --working-dir=/var/www/html
+
+    echo "Caching config..."
+    php artisan config:cache
+
+    echo "Caching routes..."
+    php artisan route:cache
+
+    echo "Running migrations..."
+    php artisan migrate --force
+   ```
+Awesome, we should now be able to deploy our Laravel application on Render. For any inquiries feel free to shoot me an **[email](mailto:victor@snetts.com)**. Thank you for following along.

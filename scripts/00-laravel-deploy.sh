@@ -9,6 +9,8 @@ php artisan config:cache
 echo "Caching routes..."
 php artisan route:cache
 
+php artisan key:generate --show
+
 echo "Running migrations..."
 php artisan migrate
 php artisan db:seed

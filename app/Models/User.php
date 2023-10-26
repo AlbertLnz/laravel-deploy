@@ -22,7 +22,8 @@ class User extends Authenticatable
         'photo',
         'email',
         'password',
-        'role'
+        'role',
+        'isActive?'
     ];
 
     /**
@@ -46,7 +47,15 @@ class User extends Authenticatable
     ];
 
     //One To Many Relationship
-    public function resturants(){
+    public function restaurant(){
         return $this->hasMany('App\Models\Restaurant');
     }
+    public function reservation(){
+        return $this->hasMany('App\Models\Reservation');
+    }
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
+    
 }

@@ -22,7 +22,8 @@ class PassportController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'role' => 'user'
         ]);
 
         $token = $user->createToken('Personal Access Token')->accessToken;
@@ -32,6 +33,8 @@ class PassportController extends Controller
 
     public function login(Request $request){
         $data = $request->all();
+        $user = User::where('email', $request->email)->first();
+
         $validator = Validator::make($data, [
             'email' =>'required | email',
             'password' => 'min:6 | required'
@@ -42,7 +45,7 @@ class PassportController extends Controller
 
         if(auth()->attempt($data)){
             $token = auth()->user()->createToken('Personal Access Token')->accessToken;
-            return response()->json(['token' => $token], 200);
+            return response()->json(['user' => $user, 'token' => $token], 200);
         }else{
             return response()->json(['error' => 'Unauthorized'], 401);
         }

@@ -13,6 +13,5 @@ php artisan key:generate --show
 
 echo "Running migrations..."
 php artisan migrate
-php artisan db:seed
 php artisan passport:install
 php artisan passport:client --personal

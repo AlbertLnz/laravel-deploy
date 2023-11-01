@@ -8,6 +8,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 # LOGIN / REGISTER ROUTES
 Route::post('register', [PassportController::class, 'register'])->name('api.register');
 Route::post('login', [PassportController::class, 'login'])->name('api.login');
+Route::get('/user/{user_id}', [UserController::class, 'getUserInfo'])->name('api.user.getUserInfo');
 
 # RESTAURANTS ROUTES
 Route::get('/restaurants', [RestaurantController::class, 'getAllRestaurants'])->name('api.restaurants.index');
@@ -36,6 +38,7 @@ Route::get('/restaurants/{user_id}', [RestaurantController::class, 'showRestaura
 Route::post('/restaurant', [RestaurantController::class, 'createRestaurant'])->name('api.restaurant.createRestaurant')->middleware('auth:api');
 Route::put('/restaurant/{restaurant_id}',[ RestaurantController::class, 'updateRestaurant'])->name('api.restaurants.updateRestaurant')->middleware('auth:api');
 Route::delete('/restaurant/{restaurant_id}',[RestaurantController::class, 'deleteRestaurant'])->name('api.restaurants.deleteRestaurant')->middleware('auth:api');
+Route::get('/restaurant/{restaurant_id}/availableDates/{day}', [RestaurantController::class, 'availableDatesRestaurant'])->name('api.restaurants.availableDatesRestaurant');
 
 # TABLES ROUTE
 Route::post('restaurant/{restaurant_id}/tables', [TableController::class, 'insertTablesCapacity'])->name('api.tables.insertTablesCapacity')->middleware('auth:api');

@@ -60,7 +60,7 @@ class RestaurantSeeder extends Seeder
 
         Restaurant::create([ # 4
             'name' => "Asador Etxebarri",
-            'photo' => "https://elblogdeceleste.com/wp-content/webp-express/webp-images/uploads/2020/09/ASADOR-ETXEBARRI-sala.jpg.webp",
+            'photo' => "https://media-cdn.tripadvisor.com/media/photo-s/17/09/88/77/caption.jpg",
             'street' => "San Juan Plaza, 1",        
             "web" => "https://www.asadoretxebarri.com/",
             "cuisine" => "Asador",

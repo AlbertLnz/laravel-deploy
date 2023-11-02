@@ -57,8 +57,8 @@ class RestaurantController extends Controller
             'telephone' => $request->telephone,
             'opening_hour' => $request->opening_hour,
             'closing_hour' => $request->closing_hour,
-            'city'=>$request->city,
-            'country'=>$request->country,
+            'city' => $request->city,
+            'country' => $request->country,
             'user_id' => Auth::user()->id,
         ]);
         $lastIdOfRestaurantCreated = Restaurant::latest()->first()->id;
